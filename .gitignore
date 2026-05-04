@@ -1,0 +1,29 @@
+# Dependencies (auto-generated)
+node_modules/
+package-lock.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.env
+
+# C build artifacts
+*.o
+*.exe
+c_engine/obj/
+
+# Database (regenerated at runtime)
+*.db
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Zip files
+*.zip

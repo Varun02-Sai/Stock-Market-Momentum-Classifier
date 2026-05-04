@@ -1,0 +1,153 @@
+/*
+ * =============================================================================
+ * File:        index.css
+ * Project:     Stock Market Momentum Classifier
+ * Description: Global design system for the React dashboard.
+ *
+ *              Implements a modern dark-mode theme using:
+ *              - CSS Custom Properties (variables) for consistent theming
+ *              - Glassmorphism effect (backdrop-filter + transparency)
+ *              - Subtle radial gradients for depth
+ *              - Smooth animations for fade-in effects
+ *              - Custom scrollbar styling
+ *
+ * Design Tokens:
+ *   --bg-dark:         Deep navy background
+ *   --bg-card:         Semi-transparent card background
+ *   --accent-cyan:     Primary accent (buttons, links, MA5)
+ *   --accent-magenta:  Secondary accent (gradients, MA10)
+ *   --up-color:        Green for UP predictions
+ *   --down-color:      Red for DOWN predictions
+ * =============================================================================
+ */
+
+/* ── Design Tokens (CSS Custom Properties) ── */
+:root {
+  --bg-dark: #0a0e17;
+  --bg-card: rgba(16, 24, 40, 0.6);
+  --border-light: rgba(255, 255, 255, 0.1);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --accent-cyan: #06b6d4;
+  --accent-magenta: #d946ef;
+  --up-color: #10b981;
+  --down-color: #ef4444;
+}
+
+/* ── Base Body Styling ── */
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-dark);
+  /* Subtle radial gradients in corners for visual depth */
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(6, 182, 212, 0.08), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(217, 70, 239, 0.08), transparent 25%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+/* ── Universal Box-Sizing ── */
+* {
+  box-sizing: border-box;
+}
+
+/* ── Glassmorphism Panel ──
+ * Creates a frosted glass effect with:
+ * - Semi-transparent background
+ * - Backdrop blur (12px)
+ * - Subtle border and shadow
+ */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Prediction Glow Effects ──
+ * Applied to the PredictionCard to create a colored glow
+ * based on whether the prediction is UP (green) or DOWN (red).
+ */
+.glow-up {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.glow-down {
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+/* ── Custom Scrollbar Styling ── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ── Keyframe Animations ── */
+
+/* Pulsing glow for interactive elements */
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 10px rgba(6, 182, 212, 0.3); }
+  50% { box-shadow: 0 0 25px rgba(6, 182, 212, 0.6); }
+  100% { box-shadow: 0 0 10px rgba(6, 182, 212, 0.3); }
+}
+
+/* Fade-in with slight upward slide */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* ── Text Gradient Utility ──
+ * Creates a gradient text effect (cyan → magenta)
+ * Used for the "Momentum Classifier" title in Navbar.
+ */
+.text-gradient {
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Loading Spinner ──
+ * CSS-only animated spinner shown while waiting for API response.
+ */
+.spinner {
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-left-color: var(--accent-cyan);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
